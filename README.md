@@ -33,6 +33,7 @@ Some extra bonus stuff happens like
 ```
 
 There's some very lazy things going on here
+- Runs every 2 minutes
 - `docker-compose.yml` the stock one, required
 - `docker-compose.prod.yml` your local settings, like setting the crypto network (`bitcoin`/`testnet`/`litecoin` etc) and return coin address
 - `data/docker-compose-paid-instances.yml` the generated extra docker-compose YAML for paid instances
@@ -41,10 +42,27 @@ The lazy magic here, is that docker-compose wont do anything unless one of the Y
 
 The only shameful thing is that `/sync` call, which re-builds the composer and checks for payments, your nginx shouldnt allow this to be accessed other than locally (or change the code and move it to a local command)
 
-
 Probably nearly all of this can be removed by using an actual decent interface like coinbase's API, which handles payments way better, but, where is the fun in that? :)
 
 
+So basically, when someone has paid for their container, a random name is generated (`stir-commuted` herein), and `data/docker-compose-paid-instances.yml` will contain for example...
+
+```
+  paid_instance_stir-commuted:
+    image: dgtlmoon/changedetection.io:latest
+    networks:
+    - provisioner_net
+    environment:
+    - USE_X_SETTINGS=1
+    - SALTED_PASS=abc123
+    hostname: stir-commuted
+    volumes:
+    - paid_instance_stir-commuted-data:/datastore
+    restart: unless-stopped
+
+```
+
+And they can access it via https://yoursite.com/stir-commuted
 
 
 ## Testing/Development
