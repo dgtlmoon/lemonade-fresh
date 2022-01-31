@@ -8,7 +8,7 @@ In otherwords - provision a container using docker-compose when someone pays you
 
 _Yes I'm sure there's a better way todo this, but this works for me :), and it was the fastest way I could get some proof of concept working_
 
-<img src="https://raw.githubusercontent.com/dgtlmoon/lemonade-fresh/main/screenshot.png">
+<img src="https://raw.githubusercontent.com/dgtlmoon/lemonade-fresh/main/screenshot.png?large=ok">
 
 # How does it work?
 
