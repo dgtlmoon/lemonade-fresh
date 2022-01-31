@@ -17,6 +17,9 @@ _Yes I'm sure there's a better way todo this, but this works for me :), and it w
 - `docker-compose up` runs periodically, it knows when a YAML has changed thanks to its internal checksums, so lazy so implementation.. 
 - The new paid container is running, and has a randomly generated hostname, this hostname is available as http://yoursite/random-name via `proxy_pass`
 
+Then the new 'customer' simply accesses their hosted container via nginx's `proxy_pass` as a path on your server, it's recommended to run the containers as a sub-domain, otherwise the nginx rules get a bit complicated ie, https://pay-me.mydomain.io/ , so the hosted container would be available as https://pay-me.mydomain.io/random-name
+
+
 Some extra bonus stuff happens like
 - Generate a salted password and set it as an ENV var so they can login
 - [volumes are also created in the docker-compose YAML generator](https://github.com/dgtlmoon/lemonade-fresh/blob/b3d737100c2e94f895c53f7f88b7937a1c3a03e2/app/dcgenerator.py#L30)
