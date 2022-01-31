@@ -1,0 +1,17 @@
+# This should be run from within the container via the mounted docker socket
+# docker-compose -f docker-compose.yml -f data/docker-compose-paid-instances.yml up -d
+
+version: '2'
+services:
+
+  lemonadestand:
+    environment:
+      - USE_X_SETTINGS=1
+      - SMTP_SERVER=smtp
+      # Where to send the coinage after a transaction, NEVER store unspent transactions on your server
+      - BTC_FORWARD_ADDRESS=1Hou2StLJUS6gYw7ENJDkkLL4YJs1WdZGs
+      # Satoshis required, note, there is always a minimum required for your network type.
+      - BTC_FORWARD_FEE=1500
+      # BTC_NETWORK litecoin, dogecoin, testnet, bitcoin etc
+      - BTC_NETWORK=bitcoin
+

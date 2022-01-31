@@ -1,0 +1,3 @@
+*.db
+docker-compose-paid-instances.yml
+secret.txt

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>changedetection.io - get your lemonade fresh instance!</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="{{ url_for('static', filename='./css/bootstrap.min.css') }}" rel="stylesheet">
+    <!--<link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}"> -->
+    <link href="{{ url_for('static', filename='./css/signin.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='./css/animated-cloud.css') }}" rel="stylesheet">
+</head>
+<body>
+<!-- maybe vanta js animation? lottie?-->
+<div id="cloud-wrapper">
+  <div class="cloud x1"></div>
+	<!-- Time for multiple clouds to dance around -->
+	<div class="cloud x2"></div>
+	<div class="cloud x3"></div>
+	<div class="cloud x4"></div>
+</div>
+{%- for category, message in get_flashed_messages(with_categories = true) %}
+<div class="alert alert-danger">
+    {{ message }}
+</div>
+{%- endfor %}
+
+{% from '_helpers.jinja' import render_field %}
+    <div class="lemonade-stand-splash">
+        <img src="{{ url_for('static', filename='./images/lemon.gif') }}" height=30 >
+        <small class="form-text text-muted">This lemonade-stand is offering</small><br/>
+        <strong>Changedetection.io hosted website change detection.</strong>
+    </div>
+
+    <form class="form-signin" action="{{ url_for('letsgo') }}" method="POST">
+        <div class="form-group">
+            <p>Price for 90 days of Lemonade Fresh Credits  - BTC {{ btc_amount }}</p>
+            <p>This covers you for 90 days of credits (1 Day = 1 Lemonade Fresh Credit), top up your lemonade credits at anytime!</p>
+
+        </div>
+        <div class="form-group" style="text-align: center;">
+            {{ render_field(form.email, placeholder="", required=true) }}
+            <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone, we will only contact you when your lemonade is low.</small>
+        </div>
+            <div class="form-group" style="text-align: center;">
+            {{ render_field(form.antispam, placeholder="LEM.N", required=true) }}
+            <small id="" class="form-text text-muted">Are you a robot? What's the name of our favourite fruit? :) We made a hint for you, it's our favourite fruit!</small>
+        </div>
+        <div class="form-group">
+            On the next page you'll get the payment info and URL of your lemonade-fresh instance!
+        </div>
+        <button type="submit" class="btn btn-primary">Let's go!</button>
+        <div class="form-group">
+            <br/>
+            <a href="{{ url_for('contact') }}">Need Help? Contact us here!</a>
+            </div>
+    </form>
+
+
+
+</body>
+</html>

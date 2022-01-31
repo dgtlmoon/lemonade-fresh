@@ -1,0 +1,13 @@
+flask
+Flask-SQLAlchemy
+Flask-Login
+ruamel.yaml==0.17.4
+flask-wtf
+email_validator
+wtforms
+requests
+flask-qrcode
+
+eventlet>=0.31.0
+# needs libgmp-dev
+bitcoinlib == 0.6.3

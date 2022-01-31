@@ -1,0 +1,52 @@
+# This should be run from within the container via the mounted docker socket
+# docker-compose -f docker-compose.yml -f data/docker-compose-paid-instances.yml up -d
+
+version: '2'
+services:
+  nginx:
+    container_name: lemonadestand-nginx
+    image: nginx:1
+    networks:
+      - provisioner_net
+    ports:
+      - "104.248.118.3:443:443"
+    volumes:
+      - ./config/nginx:/etc/nginx/conf.d
+      - ./config/certbot/conf:/etc/letsencrypt
+      - ./config/certbot/www:/var/www/certbot
+      #openssl dhparam -out /etc/ssl/certs/dhparam.pem 1024
+      - /etc/ssl/certs/dhparam.pem:/etc/ssl/certs/dhparam.pem
+      - ./app/static:/var/www/static
+
+  lemonadestand:
+    image: python:3.9-buster
+    container_name: lemonadestand-web
+    hostname: lemonadestand-web
+    volumes:
+      - ./data:/datastore
+      - ./app:/app
+      - ./requirements.txt:/app/requirements.txt
+    networks:
+      - provisioner_net
+    command: /app/container-run.sh
+    environment:
+      - USE_X_SETTINGS=1
+      - SMTP_SERVER=104.248.118.3
+    extra_hosts:
+      # your local public IP, in postfix I set the docker network range to be a permitted sender (172/8)
+      # mynetworks = 127.0.0.0/8 [::ffff:127.0.0.0]/104 [::1]/128 172.0.0.0/8
+      - "smtp:104.248.118.3"
+
+  # Test SMTP server, provides a UI at :9025 to examine sent emails from opencart.
+#  mailhog_smtp:
+#      image: mailhog/mailhog
+#      ports:
+#          - 8025:8025 # Web UI on 8025
+#          - 1025:1025
+#      networks:
+#          provisioner_net:
+#              aliases:
+#              - smtp-server
+
+networks:
+  provisioner_net:
