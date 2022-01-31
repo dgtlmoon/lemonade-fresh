@@ -25,6 +25,28 @@ Some extra bonus stuff happens like
 - [volumes are also created in the docker-compose YAML generator](https://github.com/dgtlmoon/lemonade-fresh/blob/b3d737100c2e94f895c53f7f88b7937a1c3a03e2/app/dcgenerator.py#L30)
 
 
+# Syncing new containers when paid
+
+```
+# m h  dom mon dow   command
+*/2 * * * * curl -s https://your-site.com/sync >/dev/null && cd /var/www/provisioner && docker-compose --log-level=WARNING -f docker-compose.yml -f docker-compose.prod.yml -f data/docker-compose-paid-instances.yml  up -d --remove-orphans
+```
+
+There's some very lazy things going on here
+- `docker-compose.yml` the stock one, required
+- `docker-compose.prod.yml` your local settings, like setting the crypto network (`bitcoin`/`testnet`/`litecoin` etc) and return coin address
+- `data/docker-compose-paid-instances.yml` the generated extra docker-compose YAML for paid instances
+
+The lazy magic here, is that docker-compose wont do anything unless one of the YAML's change, `up` supports `--remove-orphans` so it's easy to remove containers that are not paid for, and `--log-level=WARNING` keeps it quiet unless something bad happens.
+
+The only shameful thing is that `/sync` call, which re-builds the composer and checks for payments, your nginx shouldnt allow this to be accessed other than locally (or change the code and move it to a local command)
+
+
+Probably nearly all of this can be removed by using an actual decent interface like coinbase's API, which handles payments way better, but, where is the fun in that? :)
+
+
+
+
 ## Testing/Development
 
 - I like the [Electrum client](https://electrum.org/), start it in _testnet_ mode, `electrum --testnet`
