@@ -4,7 +4,7 @@
 
 An extremely simple platform which enables you to earn digital currency for docker containers as a service (CaaS/SaaS)
 
-In otherwords - provision a container using docker-compose when someone pays you with cryptocurrency - host that container for them.
+*In otherwords* - provision a container using docker-compose when someone pays you with cryptocurrency - host that container for them, accessible as a URL path on your server (that URL path is automatically generated from two random words)
 
 _Yes I'm sure there's a better way todo this, but this works for me :), and it was the fastest way I could get some proof of concept working_
 
