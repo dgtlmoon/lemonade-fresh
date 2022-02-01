@@ -64,6 +64,7 @@ So basically, when someone has paid for their container, a random name is genera
 
 And they can access it via https://yoursite.com/stir-commuted via [this nginx location statement](https://github.com/dgtlmoon/lemonade-fresh/blob/2c2443601a53e14007aca0185320b71e00d59bdd/config/nginx/default.conf#L32)
 
+`image:` is set by `HOSTED_IMAGE` env var
 
 ## Testing/Development
 
