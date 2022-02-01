@@ -2,7 +2,7 @@
 
 # Lemonade Fresh - Cryptocurrency Paid Container Provisioner
 
-An extremely simple platform which enables you to earn digital currency for docker containers as a service (CaaS/SaaS)
+An extremely simple platform which enables you to host a docker container in exchange for digital currency (bitcoin/litecoin/dogecoin)
 
 *In otherwords* - provision a container using docker-compose when someone pays you with cryptocurrency - host that container for them, accessible as a URL path on your server (that URL path is automatically generated from two random words)
 
