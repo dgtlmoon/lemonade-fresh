@@ -66,6 +66,8 @@ And they can access it via https://yoursite.com/stir-commuted via [this nginx lo
 
 `image:` is set by `HOSTED_IMAGE` env var
 
+Once it is paid, the server will send the coin balance onto an another address, which should NOT be on the server
+
 ## Testing/Development
 
 - I like the [Electrum client](https://electrum.org/), start it in _testnet_ mode, `electrum --testnet`
