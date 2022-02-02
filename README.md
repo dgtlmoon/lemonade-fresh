@@ -76,3 +76,6 @@ And they can access it via https://yoursite.com/stir-commuted via [this nginx lo
 
 - Some web-ops stuff like `certbot` not included, you will need to sort out how this works.
 - No threaded python gunicorn etc server
+
+## Going forwards
+- You could use a wildcard DNS entry, tweak the nginx rules, and bounce the requests to a `random-name.yoursite.com` instead of a path suffix, then you dont have to worry about mapping paths etc and they could enjoy full socket IO access aswell
