@@ -32,7 +32,7 @@ Some extra bonus stuff happens like
 */2 * * * * curl -s https://your-site.com/sync >/dev/null && cd /var/www/provisioner && docker-compose --log-level=WARNING -f docker-compose.yml -f docker-compose.prod.yml -f data/docker-compose-paid-instances.yml  up -d --remove-orphans
 ```
 
-There's some very lazy things going on here
+There's some **very lazy** things going on here
 - Runs every 2 minutes
 - `docker-compose.yml` the stock one, required
 - `docker-compose.prod.yml` your local settings, like setting the crypto network (`bitcoin`/`testnet`/`litecoin` etc) and return coin address
